@@ -20,11 +20,11 @@ execute "unzip_redis_archive" do
   command "tar xzf redis-stable.tar.gz"
   cwd "/tmp"
   action :nothing
-  notifies :run, "execute[redis_build]", :immediately
+  notifies :run, "execute[redis_build_and_install]", :immediately
 end
 
 # Configure the application: install
-execute "redis_build" do
+execute "redis_build_and_install" do
   cwd "/tmp/redis-stable.tar.gz"
   action :nothing
   notifies :run, "execute[echo -n | ./install_server.sh]", :immediately
