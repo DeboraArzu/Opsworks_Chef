@@ -1,1 +1,1 @@
-default['redis']['version'] = '2.8.9'
+default['redis']['version'] = '5.0.4'
