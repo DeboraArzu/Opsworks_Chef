@@ -23,25 +23,29 @@ execute "unzip_redis_archive" do
   command "tar xzf redis-#{version_number}.tar.gz"
   cwd "/tmp"
   action :nothing
-  notifies :run, "execute[redis_build_and_install]", :immediately
+  notifies :run, "execute[build_and_install_redis]", :immediately
 end
 
 # Configure the application: install
-execute "redis_build_and_install" do
+# sudo make install
+execute "build_and_install_redis" do
+  command 'make && make install'
   cwd "/tmp/redis-#{version_number}"
   action :nothing
-  notifies :run, "execute[echo -n | ./install_server.sh]", :immediately
+  notifies :run, "execute[install_server_redis]", :immediately
 end
 
-# Install the Server
-execute "echo -n | ./install_server.sh" do
+# cd utils
+# sudo ./install_server.sh
+execute "install_server_redis" do
+  command "echo -n | ./install_server.sh"
   cwd "/tmp/redis-#{version_number}/utils"
   action :nothing
 end
 
-service "redis_6379" do
-  action [:start]
+# sudo service redis_6379 start
+service "redis_6379 " do
+  action [ :start, :enable ]
   # This is necessary so that the service will not keep reporting as updated
   supports :status => true
 end
-
