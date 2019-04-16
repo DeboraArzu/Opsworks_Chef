@@ -44,7 +44,7 @@ execute "install_server_redis" do
 end
 
 # sudo service redis_6379 start
-service "redis_6379 " do
+service "redis_6379" do
   action [ :start, :enable ]
   # This is necessary so that the service will not keep reporting as updated
   supports :status => true
