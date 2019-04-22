@@ -48,5 +48,5 @@ service "redis_6379" do
   action :start
   # action [ :start, :enable ]
   # This is necessary so that the service will not keep reporting as updated
-  # supports :status => true
+  supports :status => true
 end
