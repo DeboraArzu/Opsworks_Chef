@@ -45,7 +45,7 @@ end
 
 # sudo service redis_6379 start
 service "redis_6379" do
-  action [ :enable, :start ]
+  action [ :start, :enable ]
   # This is necessary so that the service will not keep reporting as updated
-  supports :status => true, :restart => true
+  supports :status => true
 end
