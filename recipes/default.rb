@@ -44,11 +44,9 @@ execute "install_server_redis" do
 end
 
 # sudo service redis_6379 start
+# Issue with service "redis_6379" do
+#   action :start
+# end
 execute "start service" do
   command "sudo service redis_6379 start"
 end
-# service "redis_6379" do
-#   # This is necessary so that the service will not keep reporting as updated
-#   # supports :status => true, :restart => true, :reload => true
-#   action :start
-# end
